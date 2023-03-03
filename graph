@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<stdlib.h>,0
+#include<stdlib.h>
 #include<math.h>
 #include<conio.h>
 #include<time.h>
@@ -43,17 +43,44 @@ int graph[100][100]=
 {0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
 {0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0}};
 
+struct student
+{
+    char name[20];
+    int rank[10];
+};
 int main()
 {
     int i,j;
+     struct student s[20];
+    s[0]=(struct student){"James Bond",100067};
+    s[1]=(struct student){"Neha sirur",99678};
+    s[2]=(struct student){"Ananya Deshpande",21203};
+    s[3]=(struct student){"Shreyas A",63634};
+    s[4]=(struct student){"Amogh M",7802};
+    s[5]=(struct student){"Jadi",56783};
+    s[6]=(struct student){"Sameer",24658};
+    s[7]=(struct student){"Shraddha",1508};
+    s[8]=(struct student){"Shiggavi",94828};
+    s[9]=(struct student){"Punith",37377};
+    s[10]=(struct student){"Kathik",87828};
+    s[11]=(struct student){"Sunil",46966};
+    s[12]=(struct student){"Praveen",64725};
+    s[13]=(struct student){"Basappa",2475};
+    s[14]=(struct student){"Pragati",567};
+    s[15]=(struct student){"Harry potter",28465};
+
+   for(i=0;i<16;i++)
+    {
+        printf("%s: %s\n",s[i].name,s[i].rank);
+    }
     for(i=0;i<36;i++)
-    {for(j=0;j<36;j++)
+        {for(j=0;j<36;j++)
     {
         printf(" %d ",graph[i][j]);
 
     }
     printf("\n");
-}}
+    return 0;}
 
 
-
+}
