@@ -71,7 +71,7 @@ int main()
 
    for(i=0;i<16;i++)
     {
-        printf("%s: %s\n",s[i].name,s[i].rank);
+        printf("%s: %d\n",s[i].name,s[i].rank);
     }
     for(i=0;i<36;i++)
         {for(j=0;j<36;j++)
