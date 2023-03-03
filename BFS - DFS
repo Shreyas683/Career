@@ -1,0 +1,113 @@
+/*-------DFS-----------*/
+#include<stdio.h>
+int a[100][100];
+int visited[100];
+int st[100];
+int n;
+int top=-1;
+void push(int st[100],int ele)
+{
+    top=top+1;
+    st[top]=ele;
+}
+int pop(int st[100])
+{
+    return(st[top]);
+}
+void dfs(int a[100][100],int n,int v)
+{
+    visited[v]=1;
+    for(int i=1;i<=n;i++)
+    {
+        if(a[v][i]==1 && visited[i]==0)
+        {
+            push(st,i);
+            dfs(a,n,i);
+        }
+    }
+}
+void display(int a[100][100],int n)
+{
+    int i,j;
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=n;j++)
+        {
+            printf("%d\t",a[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    int i,j,v,ele;
+    printf("Enter N:\n");
+    scanf("%d",&n);
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=n;j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+    for(i=1;i<=n;i++)
+        visited[i]=0;
+    printf("Enter source:\n");
+    scanf("%d",&v);
+    dfs(a,n,v);
+    printf("%d\t",v);
+    while(top!=-1)
+    {
+        ele=pop(st);
+        top--;
+        printf("%d\t",ele);
+    }
+}
+/*------BFS-----------*/
+#include<stdio.h>
+int a[100][100],visited[100],queue[100],f=1,r=1,n,i,j,v,ele;
+int main()
+{
+    printf("Enter N:\n");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+    for(i=0;i<n;i++)
+        visited[i]=0;
+    printf("Enter source:\n");
+    scanf("%d",&v);
+    bfs(v);
+}
+void bfs(int v)
+{
+    enqueue(v);
+    visited[v]=1;
+    while(f<r)
+    {
+        int u=dequeue();
+        printf("%d\t",u);
+        f++;
+        for(i=0;i<n;i++)
+        {
+            if(a[u][i]==1 && visited[i]==0)
+            {
+                enqueue(i);
+                visited[i]=1;
+            }
+        }
+    }
+}
+void enqueue(int ele)
+{
+    queue[r]=ele;
+    r++;
+}
+int dequeue()
+{
+    return(queue[f]);
+}
