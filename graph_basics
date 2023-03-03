@@ -1,0 +1,172 @@
+#include<stdio.h>
+visited[10];
+
+void displaymatrix( int arr[8][8])
+{
+    int i,j;
+    for(i=0;i<7;i++)
+    {
+        for(j=0;j<7;j++)
+        {
+            printf("%d ",arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+void displayedge( int arr[8][8])
+{
+     int i,j;
+    for(i=0;i<7;i++)
+    {
+        for(j=0;j<7;j++)
+        {
+            if(i!=j && arr[i][j]!=0 && arr[j][i]!=0)
+            {
+              printf("%d->%d ",i,j);
+            }
+        }
+    }
+    printf("\n");
+
+}
+ void check(int arr[8][8])
+ {
+       int i=0,j=0;
+            if(arr[i][j]==arr[j][i])
+            {
+                printf("Undirected graph\n");
+            }
+            else
+            {
+                printf("Directed graph\n");
+            }
+ }
+void dfs(int arr[8][8], int v, int source)
+{
+    int i;
+    visited[source] = 1;
+     for(i=0; i<v; i++)
+    {
+       if(arr[source][i] == 1 && visited[i] == 0)
+         {
+             printf("%d ", i);
+             dfs(arr, v, i);
+         }
+    }
+}
+
+/*void check_path(int arr[8][8], int m, int source)
+{
+    int i;
+    visited[source] = 1;
+
+     for(i=0; i<m; i++)
+    {
+       if(arr[source][i] == 1 && visited[i] == 0)
+         {
+             printf("%d ", i);
+             check_path(arr, m, i);
+         }
+    }
+}*/
+void bfs(int arr[8][8], int v, int source)
+{
+     int queue[20];
+     int front = 0, rear = 0, u, i;
+    // int visited[10];
+     for (i= 0; i < v; i ++)
+          visited[i] = 0;
+     queue[rear] = source;
+     visited[source] = 1;
+      printf("The BFS Traversal is \n");
+      while (front <= rear)
+      {
+           u = queue[front];
+           printf("%d ", u);
+          front = front + 1;
+            for(i=0;i<v;i++)
+        {
+            if(arr[u][i] == 1 && visited[i] == 0)
+            {
+                visited[i] = 1;
+                rear = rear + 1;
+                queue[rear] = i;
+            }
+        }
+    }
+}
+void check_path(int arr[8][8], int m, int source)
+{
+     int queue[20];
+     int front = 0, rear = 0, u, i;
+     for (i= 0; i <= m; i ++)
+          visited[i] = 0;
+     queue[rear] = source;
+     visited[source] = 1;
+      while (front <= rear)
+      {
+           u = queue[front];
+           printf("%d ", u);
+          front = front + 1;
+            for(i=0;i<=m;i++)
+        {
+            if(arr[u][i] == 1 && visited[i] == 0)
+            {
+                visited[i] = 1;
+                rear = rear + 1;
+                queue[rear] = i;
+            }
+        }
+    }
+}
+int main()
+{
+    int i,ch,v,k,m;
+
+    int arr[5][5]={0};
+    int visited[8]={0};
+     int source=0;
+    arr[1][1]=arr[2][2]=arr[3][3]=arr[4][4]=arr[5][5]=0;
+    arr[1][2]=arr[2][1]=1;
+    arr[1][3]=arr[3][1]=1;
+    arr[1][4]=arr[4][1]=0;
+    arr[1][5]=arr[5][1]=0;
+    arr[2][3]=arr[3][2]=0;
+    arr[3][4]=arr[4][3]=1;
+    arr[5][3]=arr[3][5]=1;
+    //arr[5][7]=arr[7][5]=1;
+    //arr[6][7]=arr[7][6]=1;
+
+    for (i= 0; i < v; i ++)
+         visited[i] = 0;
+    while(1)
+    {
+        printf("\nEnter choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: printf("Matrix:\n");
+                    displaymatrix(arr);
+                    printf("Edges :\n");
+                    displayedge(arr);
+                    break;
+            case 2:check(arr);
+                    break;
+            case 3: printf("The DFS Traversal is \n");
+                    printf("%d ", source);
+                    dfs(arr, 8, source);
+                    break;
+            case 4:bfs(arr, 8, source);
+                    break;
+            case 5:printf("source=%d ", source);
+                   printf("\nEnter TO vertex");
+                   scanf("%d",&m);
+                   printf("Dest=%d\n",m);
+                   printf("Path:");
+                  check_path(arr,m,source);
+                    break;
+        }
+    }
+    return 0;
+}
+
