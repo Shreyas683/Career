@@ -6,6 +6,8 @@
 
 int visited[100]={0};
 
+
+
 int graph[100][100]=
 {
 {0,	3,	0,	2,	2,	2,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
@@ -52,6 +54,42 @@ struct student
 };
 int main()
 {
+    printf("0--->10th\t");
+    printf("1--->Diploma\t");
+    printf("2--->Government_service\t");
+    printf(" 3--->Science\n");
+    printf("4--->Commerce\t");
+    printf("5--->Arts\t");
+    printf("6--->B.Arch\t");
+    printf("7--->B.Sc\n");
+    printf("8--->B.Pharma\t");
+    printf("9--->B.E/B.Tech\t");
+    printf("10-->BAMS\t");
+    printf("11-->MBBS\n");
+    printf("12-->BDS\t");
+    printf("13-->B.Com\t");
+    printf("14-->BBA\t");
+    printf("15-->CA\n");
+    printf("16-->BSW\t");
+    printf("17-->BA\t");
+    printf("18-->LLB\t");
+    printf("19-->LLM\n");
+    printf("20-->MA\t");
+    printf("21-->MSW\t");
+    printf("22-->BCA\t");
+    printf("23-->MCA\n");
+    printf("24-->MBA\t");
+    printf("25-->M.Com\t");
+    printf("26-->B.Ed\t");
+    printf("27-->M.Ed\n");
+    printf("28-->CS\t");
+    printf("29-->MDS\n");
+    printf("30-->M.D\n");
+    printf("31-->M.Tech\n");
+    printf("32-->M.Pharma\n");
+    printf("33-->M.Sc");
+    printf("34-->P.hd\n");
+
     int i,j,key;
      struct student s[20]={
     {"Bond007",10067},
