@@ -113,8 +113,12 @@ int main()
 
     while(1)
     {
+        printf("\n\n");
+
         printf("1. Display Edges\n");
         printf("2. Sort the rank\n");
+        printf("3. Display Graph\n");
+        printf("Enter the choice:");
         scanf("%d",&key);
         switch(key)
         {
@@ -124,6 +128,8 @@ int main()
             case 2: bubble_sort(s, 15);
                     displayStudent(s,16);
                     break;
+
+            case 3: displayGraph(graph);
 
             default: exit(0);
         }
@@ -162,4 +168,17 @@ void displayStudent(struct student s[],int n)
     for (int i = 0; i < n; i++) {
         printf("%s:     \t%d\n", s[i].name, s[i].rank);
     }
+}
+
+displayGraph(int graph[100][100])
+{
+    int i,j;
+    for(i=0;i<36;i++)
+        {   for(j=0;j<36;j++)
+            {
+            printf(" %d ",graph[i][j]);
+
+            }
+            printf("\n");
+        }
 }
