@@ -7,6 +7,8 @@
 struct student
 {
     char name[20];
+    int roll;
+    char email[20];
     int rank;
 };
 
@@ -82,7 +84,7 @@ void displayStudent(struct student s[],int n)
 {
     for (int i = 0; i < n; i++)
     {
-        printf("%s:     \t%d\n", s[i].name, s[i].rank);
+        printf("%s:   \t%d   \t%s   \t%d   \n", s[i].name,s[i].roll,s[i].email ,s[i].rank);
     }
 }
 
@@ -141,22 +143,22 @@ int main()
 
     int i,j,key;
      struct student s[20]={
-    {"Bond007",10067},
-    {"Neha",99678},
-    {"Ananya",21203},
-    {"Shreyas",63634},
-    {"Amogh",7802},
-    {"Jadi",56783},
-    {"Sameer",24658},
-    {"Shraddha",11508},
-    {"Shiggavi",94828},
-    {"Punith",37377},
-    {"Kathik",87828},
-    {"Sunil",46966},
-    {"Praveen",64725},
-    {"Basappa",2475},
-    {"Pragati",567},
-    {"Dabade",28465},
+    {"Bond007",1,"007@gmail.com",10067},
+    {"Neha",2,"Neha16@gmail.com",99678},
+    {"Ananya",3,"annaya@gmail.com",21203},
+    {"Shreyas",4,"shreyu@gmail.com",63634},
+    {"Amogh",5,"amoghrrrr@gmail.com",7802},
+    {"Jadi",6,"pratjd@gmail.com",56783},
+    {"Sameer",7,"sammy@gmail.com",24658},
+    {"Shraddha",8,"shraddha@gmail.com",11508},
+    {"Shiggavi",9,"shiggu@gmail.com",94828},
+    {"Punith",10,"punnya@gmail.com",37377},
+    {"Kathik",11,"karthikrk@gmail.com",87828},
+    {"Sunil",12,"sunnya@gmail.com",46966},
+    {"Praveen",13,"praveen@gmail.com",64725},
+    {"Basappa",14,"bassya@gmail.com",2475},
+    {"Pragati",15,"pragati02@gmail.com",567},
+    {"Dabade",16,"shreyas12@gmail.com",28465},
      };
 
 
