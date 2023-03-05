@@ -1,0 +1,31 @@
+#include<stdio.h>
+struct student
+{
+    char fname[10];
+    char lname[10];
+    char email[20];
+    int rank;
+};
+main()
+{
+    struct student s;
+    FILE *fp;
+    int n;
+    fp=fopen("students.txt","w");
+    printf("Enter n\n");
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        printf("Enter first name\n");
+        scanf("%s",s.fname);
+        printf("Enter last name\n");
+        scanf("%s",s.lname);
+        printf("Enter rank\n");
+        scanf("%d",&s.rank);
+        printf("Enter email\n");
+        scanf("%s",s.email);
+        fprintf(fp,"%s\t%s\t%d\t%s\n",s.fname,s.lname,s.rank,s.email);
+    }
+    fclose(fp);
+}
+
