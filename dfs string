@@ -87,11 +87,48 @@ int main() {
   struct Graph* graph = (struct Graph*) malloc(sizeof(struct Graph));
   graph->num_vertices = 0;
 
-  add_edge(graph, "Alice", "Bob");
-  add_edge(graph, "Bob", "Charlie");
-  add_edge(graph, "Charlie", "David");
-  add_edge(graph, "David", "Emma");
-  add_edge(graph, "Emma", "Alice");
+  add_edge(graph, "10th", "Diploma");//1
+  add_edge(graph, "10th", "Science");//2
+  add_edge(graph, "10th", "Commerce");//3
+  add_edge(graph, "10th", "Arts");//4
+  add_edge(graph, "Science", "B.Arch");//6
+  add_edge(graph, "Science", "B.Sc");//7
+  add_edge(graph, "Science", "B.E");//8
+  add_edge(graph, "Science", "BAMS");//9
+  add_edge(graph, "Science", "MBBS");//10
+  add_edge(graph, "Science", "BDS");//11
+  add_edge(graph, "Science", "B.Pharma");//12
+  add_edge(graph, "B.Sc", "M.Sc");//13
+  add_edge(graph, "M.Sc", "P.hD");//14
+  add_edge(graph, "B.Pharma", "M.Pharma");//15
+  add_edge(graph, "B.E", "M.Tech");//16
+  add_edge(graph, "BAMS", "M.D");//17
+  add_edge(graph, "MBBS", "M.D");//18
+  add_edge(graph, "M.D", "P.hD");//19
+  add_edge(graph, "BDS", "MDS");//20
+  add_edge(graph, "Commerce", "CS");
+  add_edge(graph, "Commerce", "B.com");
+  add_edge(graph, "Commerce", "BBA");
+  add_edge(graph, "Commerce", "BCA");
+  add_edge(graph, "Commerce", "CA");
+  add_edge(graph, "B.com", "M.com");
+  add_edge(graph, "B.com", "B.Ed");
+  add_edge(graph, "B.com", "MBA");
+  add_edge(graph, "B.Ed", "M.Ed");
+  add_edge(graph, "BBA", "MBA");
+  add_edge(graph, "BCA", "MCA");
+  add_edge(graph, "Arts", "BBA");
+  add_edge(graph, "Arts", "BSW");
+  add_edge(graph, "Arts", "BA");
+  add_edge(graph, "Arts", "LLB");
+  add_edge(graph, "BSW", "MSW");
+  add_edge(graph, "BA", "MA");
+  add_edge(graph, "BA", "MCA");
+  add_edge(graph, "LLB", "LLM");
+  add_edge(graph, "Diploma", "BE");
+  add_edge(graph, "M.Pharma", "P.hd");
+  add_edge(graph, "M.tech", "P.hd");
+
 
   printf("DFS Traversal: ");
   dfs_traversal(graph);
