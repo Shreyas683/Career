@@ -38,6 +38,7 @@ void add_edge(struct Graph* graph, char* src, char* dest) {
   if (src_index == -1) {
     struct Node* src_node = (struct Node*) malloc(sizeof(struct Node));
     src_node->data = src;
+    
     src_node->next = dest_node;
     graph->adj_list[graph->num_vertices++] = src_node;
   } else {
