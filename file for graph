@@ -54,6 +54,15 @@ int graph[100][100]=
             printf("\n");
         }
 
+     for(i=0;i<36;i++)
+        {   for(j=0;j<36;j++)
+            {
+            printf("%d ",graph[i][j]);
+
+            }
+            printf("\n");
+        }
+
     fclose(fp);
 }
 
