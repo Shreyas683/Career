@@ -1,0 +1,253 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX_SIZE 35
+#define MAX_VERTICES 100
+int mat[MAX_SIZE][MAX_SIZE]; // input matrix
+int visited[MAX_SIZE][MAX_SIZE]; // visited matrix
+
+struct student
+{
+    char fname[10];
+    char lname[10];
+    int rank;
+    char email[20];
+};
+void bubblesort(struct student *s)
+{
+    struct student temp;
+    int i,j;
+    for(i=0;i<15;i++)
+    {
+        for(j=0;j<15;j++)
+        {
+            if(s[j].rank>s[j+1].rank)
+            {
+                temp=s[j];
+                s[j]=s[j+1];
+                s[j+1]=temp;
+            }
+        }
+    }
+}
+
+void dfs(int i, int j) {
+    // Mark the current cell as visited
+    visited[i][j] = 1;
+
+    // Print the current cell
+    //printf("(%d, %d) ", i, j);
+   // printf("%d ",j);
+    if(j==0){
+        printf("10th ");
+    }
+    if(j==1)
+    {
+        printf("Diploma ");
+    }
+    if(j==2)
+    {
+        printf("Government service ");
+    }
+     if(j==4)
+    {
+        printf("Commerce ");
+    }
+      if(j==5)
+    {
+        printf("Arts ");
+    }
+      if(j==6)
+    {
+        printf("B.Arch ");
+    }
+      if(j==7)
+    {
+        printf("B.Sc ");
+    }
+      if(j==8)
+    {
+        printf("B.Pharma ");
+    }
+      if(j==9)
+    {
+        printf("B.E. ");
+    }
+      if(j==10)
+    {
+        printf("BAMS ");
+    }
+      if(j==11)
+    {
+        printf("MBBS ");
+    }
+      if(j==12)
+    {
+        printf("BDS ");
+    }
+      if(j==13)
+    {
+        printf("B.Com");
+    }
+      if(j==14)
+    {
+        printf("BBA ");
+    }
+      if(j==15)
+    {
+        printf("CA ");
+    }
+      if(j==16)
+    {
+        printf("BSW ");
+    }
+      if(j==17)
+    {
+        printf("B.A.");
+    }
+     if(j==18)
+    {
+        printf("LLB ");
+    }
+     if(j==19)
+    {
+        printf("LLM ");
+    }
+      if(j==20)
+    {
+        printf("M.A. ");
+    }
+      if(j==21)
+    {
+        printf("MSW ");
+    }
+      if(j==22)
+    {
+        printf("BCA ");
+    }
+      if(j==23)
+    {
+        printf("MCA ");
+    }
+      if(j==24)
+    {
+        printf("MBA ");
+    }
+      if(j==25)
+    {
+        printf("M.Com ");
+    }
+      if(j==26)
+    {
+        printf("B.Ed ");
+    }
+      if(j==27)
+    {
+        printf("M.Ed ");
+    }
+     if(j==28)
+    {
+        printf("C.S. ");
+    }
+      if(j==29)
+    {
+        printf("MDS ");
+    }
+      if(j==30)
+    {
+        printf("MD ");
+    }
+      if(j==31)
+    {
+        printf("M.Tech ");
+    }
+      if(j==32)
+    {
+        printf("M.Pharma ");
+    }
+      if(j==33)
+    {
+        printf("M.Sc ");
+    }
+      if(j==34)
+    {
+        printf("Ph.D ");
+    }
+
+
+    // Explore all 4 neighbors (up, right, down, left)
+    if (i > 0 && mat[i-1][j] && !visited[i-1][j])
+        dfs(i-1, j); // up
+    if (j < MAX_SIZE-1 && mat[i][j+1] && !visited[i][j+1])
+        dfs(i, j+1); // right
+    if (i < MAX_SIZE-1 && mat[i+1][j] && !visited[i+1][j])
+        dfs(i+1, j); // down
+    if (j > 0 && mat[i][j-1] && !visited[i][j-1])
+        dfs(i, j-1); // left
+}
+
+int main()
+{
+      struct student s[20];
+      FILE *fp1,*fp2;
+      fp1=fopen("students1.txt","r");
+      int i;
+      for(i=0;i<15;i++)
+      {
+          fscanf(fp1,"%s %s %d %s",s[i].fname,s[i].lname,&s[i].rank,s[i].email);
+      }
+      /*for ( i = 0; i <15; i++)
+      {
+          printf("%s\t%s\t%d\t%s\n", s[i].fname, s[i].lname, s[i].rank, s[i].email);
+      }*/
+      bubblesort(s);
+      for ( i = 0; i <15; i++)
+      {
+           printf("%s            %s           %d\t    %s\n", s[i].fname, s[i].lname, s[i].rank, s[i].email);
+      }
+       fclose(fp1);
+
+     int mat[40][40];
+       fp2= fopen("graph.txt", "r");
+       if(fp2 == NULL)
+       {
+           printf("Failed to open file.\n");
+       }
+       for(int a=0;a<36;a++)
+       {
+          for(int b=0;b<36;b++)
+          {
+              fscanf(fp2,"%d",&mat[a][b]);
+
+          }
+       }
+       for(int a=0;a<35;a++)
+       {
+          for(int b=0;b<35;b++)
+          {
+              printf("%d ",mat[a][b]);
+
+          }
+          printf("\n");
+       }
+       fclose(fp2);
+     //  printf("\n\n");
+     // initialize visited matrix
+    for (int i = 0; i < MAX_SIZE; i++)
+        for (int j = 0; j < MAX_SIZE; j++)
+            visited[i][j] = 0;
+
+    // explore all connected components
+    int count = 0;
+    for (int i = 0; i < MAX_SIZE; i++) {
+        for (int j = 0; j < MAX_SIZE; j++) {
+            if (mat[i][j] && !visited[i][j]) {
+                dfs(i, j);
+                count++;
+            }
+        }
+    }
+
+
+}
+
