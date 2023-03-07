@@ -3,9 +3,8 @@
 #include <string.h>
 #define MAX_SIZE 35
 #define MAX_VERTICES 100
-int mat[MAX_SIZE][MAX_SIZE]; // input matrix
-int visited[MAX_SIZE][MAX_SIZE]; // visited matrix
-
+int mat[MAX_SIZE][MAX_SIZE];
+int visited[MAX_SIZE][MAX_SIZE];
 struct student
 {
     char fname[10];
@@ -31,10 +30,10 @@ void bubblesort(struct student *s)
     }
 }
 
-void dfs(int i, int j) {
+void dfs(int i, int j)
+{
     // Mark the current cell as visited
     visited[i][j] = 1;
-
     // Print the current cell
     //printf("(%d, %d) ", i, j);
    // printf("%d ",j);
@@ -186,68 +185,344 @@ void dfs(int i, int j) {
         dfs(i, j-1); // left
 }
 
-int main()
+void computeLPSArray(char* pat, int M, int* lps)
 {
-      struct student s[20];
-      FILE *fp1,*fp2;
-      fp1=fopen("students1.txt","r");
-      int i;
-      for(i=0;i<15;i++)
-      {
-          fscanf(fp1,"%s %s %d %s",s[i].fname,s[i].lname,&s[i].rank,s[i].email);
-      }
-      /*for ( i = 0; i <15; i++)
-      {
-          printf("%s\t%s\t%d\t%s\n", s[i].fname, s[i].lname, s[i].rank, s[i].email);
-      }*/
-      bubblesort(s);
-      for ( i = 0; i <15; i++)
-      {
-           printf("%s            %s           %d\t    %s\n", s[i].fname, s[i].lname, s[i].rank, s[i].email);
-      }
-       fclose(fp1);
+    int len = 0;
 
-     int mat[40][40];
-       fp2= fopen("graph.txt", "r");
-       if(fp2 == NULL)
-       {
-           printf("Failed to open file.\n");
-       }
-       for(int a=0;a<36;a++)
-       {
-          for(int b=0;b<36;b++)
-          {
-              fscanf(fp2,"%d",&mat[a][b]);
+    lps[0] = 0; // lps[0] is always 0
 
-          }
-       }
-       for(int a=0;a<35;a++)
-       {
-          for(int b=0;b<35;b++)
-          {
-              printf("%d ",mat[a][b]);
-
-          }
-          printf("\n");
-       }
-       fclose(fp2);
-     //  printf("\n\n");
-     // initialize visited matrix
-    for (int i = 0; i < MAX_SIZE; i++)
-        for (int j = 0; j < MAX_SIZE; j++)
-            visited[i][j] = 0;
-
-    // explore all connected components
-    int count = 0;
-    for (int i = 0; i < MAX_SIZE; i++) {
-        for (int j = 0; j < MAX_SIZE; j++) {
-            if (mat[i][j] && !visited[i][j]) {
-                dfs(i, j);
-                count++;
+    int i = 1;
+    while (i < M) {
+        if (pat[i] == pat[len]) {
+            len++;
+            lps[i] = len;
+            i++;
+        }
+        else {
+            if (len != 0) {
+                len = lps[len - 1];
+            }
+            else {
+                lps[i] = 0;
+                i++;
             }
         }
     }
+}
+
+
+void KMPSearch(char* pat, char* txt)
+{
+    int M = strlen(pat);
+    int N = strlen(txt);
+    int lps[M];
+
+    computeLPSArray(pat, M, lps);
+
+    int i = 0;  // index for txt[]
+    int j = 0;  // index for pat[]
+    while (i < N) {
+        if (pat[j] == txt[i]) {
+            j++;
+            i++;
+        }
+
+        if (j == M) {
+            //printf("Pattern found at index %d\n", i - j);
+            j = lps[j - 1];
+        }
+
+        // mismatch after j matches
+        else if (i < N && pat[j] != txt[i]) {
+            // Do not match lps[0..lps[j-1]] characters,
+            // they will match anyway
+            if (j != 0)
+                j = lps[j - 1];
+            else
+                i = i + 1;
+        }
+    }
+}
+
+int main()
+{
+      struct student s[20];
+      int ch,i,n;
+      char pat[10];
+      char txt[]="10th Diploma Governmentservice Science Commerce Arts B.Sc B.Pharma B.E. BAMS MBBS BDS B.Com BBA C.A. BSW B.A. LLB LLM M.A. MSW BCA MCA MBA M.Com B.Ed M.Ed C.S. MDS MD M.Tech M.Pharma M.ScPh.D";
+      FILE *fp1,*fp2;
+      printf("Enter no. of students details you want to be stored\n");
+      scanf("%d",&n);
+       printf("Enter first name,last name,rank,email");
+        fp1=fopen("students1.txt","w");
+        for(i=0;i<n;i++)
+        {
+            scanf("%s %s %d %s",s[i].fname,s[i].lname,&s[i].rank,s[i].email);
+            fprintf(fp1,"%s %s %d %s\n",s[i].fname,s[i].lname,s[i].rank,s[i].email);
+        }
+
+
+        fp1=fopen("students1.txt","r");
+        for(int i=0;i<15;i++)
+        {
+            fscanf(fp1,"%s %s %d %s\n",s[i].fname,s[i].lname,&s[i].rank,s[i].email);
+        }
+       bubblesort(s);
+        fp1=fopen("students1.txt","w");
+        for(i=0;i<n;i++)
+        {
+            //scanf("%s %s %d %s",s[i].fname,s[i].lname,&s[i].rank,s[i].email);
+            fprintf(fp1,"%s %s %d %s\n",s[i].fname,s[i].lname,s[i].rank,s[i].email);
+        }
+
+        fclose(fp1);
+
+
+
+
+        fp2=fopen("graph.txt", "r");
+                     for(int a=0;a<36;a++)
+                     {
+                         for(int b=0;b<36;b++)
+                         {
+                             fscanf(fp2,"%d",&mat[a][b]);
+                         }
+                     }
+                     /* for(int a=0;a<35;a++)
+                     {
+                         for(int b=0;b<36;b++)
+                         {
+                             printf("%d ",mat[a][b]);
+                         }
+                         printf("\n");
+                     }*/
+        fclose(fp2);
+
+
+
+
+    while(1)
+    {//-------------------------
+        printf("Enter choice:\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:  printf("List of courses:\n");
+                    for(int i=0;i<MAX_SIZE;i++)
+                        for(int j=0;j<MAX_SIZE;j++)
+                            visited[i][j]=0;
+
+                     int count=0;
+                     for(int i=0;i<MAX_SIZE;i++)
+                     {
+                         for(int j=0;j<MAX_SIZE;j++)
+                         {
+                             if(mat[i][j] && !visited[i][j])
+                             {
+                                 dfs(i,j);
+                                 count++;
+                             }
+                         }
+                     }
+                     break;
+
+            case 2: printf("\nEnter the degree you are interested in :\n");
+                    scanf("%s",pat);
+                    KMPSearch(pat, txt);
+                    if(strcasecmp(pat,"Diploma")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->Diploma\n");
+                    }
+                    else if(strcasecmp(pat,"Government Service")==0)
+                    {
+                        printf("Exam required:UPSC\n");
+                        printf("Guiding path:10th-->Government Service\n");
+                    }
+                    else if(strcasecmp(pat,"Science")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->12th\n");
+                    }
+                    else if(strcasecmp(pat,"Commerce")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->Government Service\n");
+                    }
+                    else if(strcasecmp(pat,"Arts")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->12th\n");
+                    }
+                    else if(strcasecmp(pat,"B.Arch")==0)
+                    {
+                        printf("Exam required:NATA\n");
+                        printf("Guiding path:10th-->12th(Science)-->B.Arch\n");
+                    }
+                    else if(strcasecmp(pat,"B.Sc")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->12th(Science)-->B.Sc\n");
+                    }
+                    else if(strcasecmp(pat,"B.Pharma")==0)
+                    {
+                        printf("Exam required:CET\n");
+                        printf("Guiding path:10th-->12th(Science)-->B.Pharma\n");
+                    }
+                    else if(strcasecmp(pat,"B.E")==0)
+                    {
+                        printf("Exam required:CET\n");
+                        printf("Guiding path:10th-->12th(Science)-->B.E\n");
+                    }
+                    else if(strcasecmp(pat,"BAMS")==0)
+                    {
+                        printf("Exam required:NEET\n");
+                        printf("Guiding path:10th-->12th(Science)-->BAMS\n");
+                    }
+                    else if(strcasecmp(pat,"MBBS")==0)
+                    {
+                        printf("Exam required:NEET\n");
+                        printf("Guiding path:10th-->12th(Science)-->MBBS\n");
+                    }
+                    else if(strcasecmp(pat,"BDS")==0)
+                    {
+                        printf("Exam required:NEET\n");
+                        printf("Guiding path:10th-->12th(Science)-->BDS\n");
+                    }
+                    else if(strcasecmp(pat,"B.Com")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->12th(Commerce)-->B.Com\n");
+                    }
+                    else if(strcasecmp(pat,"BBA")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->12th(Commerce)-->B.Com\n");
+                    }
+                    else if(strcasecmp(pat,"CA")==0)
+                    {
+                        printf("Exam required:CA Foundation->CA Intermediate->CA Final\n");
+                        printf("Guiding path:10th-->12th(Commerce)-->CA\n");
+                    }
+                    else if(strcasecmp(pat,"BSW")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->12th(Arts)-->BSW\n");
+                    }
+                    else if(strcasecmp(pat,"B.A.")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->12th(Arts)-->B.A\n");
+                    }
+                    else if(strcasecmp(pat,"LLB")==0)
+                    {
+                        printf("Exam required:CLAT\n");
+                        printf("Guiding path:10th-->12th(Arts)-->LLB\n");
+                    }
+                    else if(strcasecmp(pat,"LLM")==0)
+                    {
+                        printf("Exam required:CLAT\n");
+                        printf("Guiding path:10th-->12th(Arts)-->LLB-->LLM\n");
+                    }
+                    else if(strcasecmp(pat,"M.A")==0)
+                    {
+                        printf("Exam required:PU CET\n");
+                        printf("Guiding path:10th-->12th(Arts)-->B.A->M.A\n");
+                    }
+                    else if(strcasecmp(pat,"MSW")==0)
+                    {
+                        printf("Exam required:DSSW\n");
+                        printf("Guiding path:10th-->12th(Arts)-->BSW-->MSW\n");
+                    }
+                    else if(strcasecmp(pat,"BCA")==0)
+                    {
+                        printf("Exam required:None\n");
+                        printf("Guiding path:10th-->12th(Commerce)-->BCA\n");
+                    }
+                    else if(strcasecmp(pat,"MCA")==0)
+                    {
+                        printf("Exam required:NIMCET\n");
+                        printf("Guiding path:10th-->12th(Commerce)-->BCA-->MCA\n");
+                    }
+                    else if(strcasecmp(pat,"MBA")==0)
+                    {
+                        printf("Exam required:CAT\n");
+                        printf("Guiding path:10th-->12th(Commerce)-->BBA->MBA\n");
+                    }
+                    else if(strcasecmp(pat,"M.Com")==0)
+                    {
+                        printf("Exam required:CUET\n");
+                        printf("Guiding path:10th-->12th(Commerce)-->B.Com->M.Com\n");
+                    }
+                    else if(strcasecmp(pat,"B.Ed")==0)
+                    {
+                        printf("Exam required:B.Ed Entrance\n");
+                        printf("Guiding path:10th-->12th(Of Any Stream)->Bachelor Degree of Stream->B.Ed\n");
+                    }
+                    else if(strcasecmp(pat,"M.Ed")==0)
+                    {
+                        printf("Exam required:DUET\n");
+                        printf("Guiding path:10th-->12th(Of Any Stream)->Bachelor Degree of Stream->B.Ed->M.Ed\n");
+                    }
+                    else if(strcasecmp(pat,"C.S.")==0)
+                    {
+                        printf("Exam required:CSEET\n");
+                        printf("Guiding path:10th-->12th(Commerce)->C.S.\n");
+                    }
+                    else if(strcasecmp(pat,"MDS")==0)
+                    {
+                        printf("Exam required:PG NEET\n");
+                        printf("Guiding path:10th-->12th(Science)->BDS->MDS\n");
+                    }
+                    else if(strcasecmp(pat,"MD")==0)
+                    {
+                        printf("Exam required:PG NEET\n");
+                        printf("Guiding path:10th-->12th(Science)->MBBS/BAMS->MD\n");
+                    }
+                    else if(strcasecmp(pat,"M.Tech")==0)
+                    {
+                        printf("Exam required:GATE\n");
+                        printf("Guiding path:10th-->12th(Science)->B.E/B.Tech->M.Tech\n");
+                    }
+                    else if(strcasecmp(pat,"M.Pharma")==0)
+                    {
+                        printf("Exam required:GPAT\n");
+                        printf("Guiding path:10th-->12th(Science)->B.Pharma->M.Pharma\n");
+                    }
+                    else if(strcasecmp(pat,"M.Sc")==0)
+                    {
+                        printf("Exam required:CUET\n");
+                        printf("Guiding path:10th-->12th(Science)->B.Sc->M.Sc\n");
+                    }
+                    else if(strcasecmp(pat,"Ph.D")==0)
+                    {
+                        printf("Exam required:CSIR UGC NET/UGC NET/IIT JAM/NPAT\n");
+                        printf("Guiding path:10th-->12th(Science)->UnderGraduation->PostGraduation->Ph.D\n");
+                    }
+                    break;
+
+
+            case 3 : fp1=fopen("students1.txt","r");
+                     for(int i=0;i<n;i++)
+                     {
+                        fscanf(fp1,"%s %s %d %s",s[i].fname,s[i].lname,&s[i].rank,s[i].email);
+                     }
+                     for(int i=0;i<n;i++)
+                     {
+                        if(s[i].rank>=1 || s[i].rank<=1000)
+                        printf("go to science\n");
+                        break;
+                     }
+
+
+        }
+
+
+
+    }
+
 
 
 }
+
 
