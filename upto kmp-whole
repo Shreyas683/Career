@@ -1,0 +1,326 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX_SIZE 35
+#define MAX_VERTICES 100
+int mat[MAX_SIZE][MAX_SIZE];
+int visited[MAX_SIZE][MAX_SIZE];
+struct student
+{
+    char fname[10];
+    char lname[10];
+    int rank;
+    char email[20];
+};
+void bubblesort(struct student *s)
+{
+    struct student temp;
+    int i,j;
+    for(i=0;i<15;i++)
+    {
+        for(j=0;j<15;j++)
+        {
+            if(s[j].rank>s[j+1].rank)
+            {
+                temp=s[j];
+                s[j]=s[j+1];
+                s[j+1]=temp;
+            }
+        }
+    }
+}
+
+void dfs(int i, int j)
+{
+    // Mark the current cell as visited
+    visited[i][j] = 1;
+    // Print the current cell
+    //printf("(%d, %d) ", i, j);
+   // printf("%d ",j);
+    if(j==0){
+        printf("10th ");
+    }
+    if(j==1)
+    {
+        printf("Diploma ");
+    }
+    if(j==2)
+    {
+        printf("Government service ");
+    }
+     if(j==4)
+    {
+        printf("Commerce ");
+    }
+      if(j==5)
+    {
+        printf("Arts ");
+    }
+      if(j==6)
+    {
+        printf("B.Arch ");
+    }
+      if(j==7)
+    {
+        printf("B.Sc ");
+    }
+      if(j==8)
+    {
+        printf("B.Pharma ");
+    }
+      if(j==9)
+    {
+        printf("B.E. ");
+    }
+      if(j==10)
+    {
+        printf("BAMS ");
+    }
+      if(j==11)
+    {
+        printf("MBBS ");
+    }
+      if(j==12)
+    {
+        printf("BDS ");
+    }
+      if(j==13)
+    {
+        printf("B.Com");
+    }
+      if(j==14)
+    {
+        printf("BBA ");
+    }
+      if(j==15)
+    {
+        printf("CA ");
+    }
+      if(j==16)
+    {
+        printf("BSW ");
+    }
+      if(j==17)
+    {
+        printf("B.A.");
+    }
+     if(j==18)
+    {
+        printf("LLB ");
+    }
+     if(j==19)
+    {
+        printf("LLM ");
+    }
+      if(j==20)
+    {
+        printf("M.A. ");
+    }
+      if(j==21)
+    {
+        printf("MSW ");
+    }
+      if(j==22)
+    {
+        printf("BCA ");
+    }
+      if(j==23)
+    {
+        printf("MCA ");
+    }
+      if(j==24)
+    {
+        printf("MBA ");
+    }
+      if(j==25)
+    {
+        printf("M.Com ");
+    }
+      if(j==26)
+    {
+        printf("B.Ed ");
+    }
+      if(j==27)
+    {
+        printf("M.Ed ");
+    }
+     if(j==28)
+    {
+        printf("C.S. ");
+    }
+      if(j==29)
+    {
+        printf("MDS ");
+    }
+      if(j==30)
+    {
+        printf("MD ");
+    }
+      if(j==31)
+    {
+        printf("M.Tech ");
+    }
+      if(j==32)
+    {
+        printf("M.Pharma ");
+    }
+      if(j==33)
+    {
+        printf("M.Sc ");
+    }
+      if(j==34)
+    {
+        printf("Ph.D ");
+    }
+
+
+    // Explore all 4 neighbors (up, right, down, left)
+    if (i > 0 && mat[i-1][j] && !visited[i-1][j])
+        dfs(i-1, j); // up
+    if (j < MAX_SIZE-1 && mat[i][j+1] && !visited[i][j+1])
+        dfs(i, j+1); // right
+    if (i < MAX_SIZE-1 && mat[i+1][j] && !visited[i+1][j])
+        dfs(i+1, j); // down
+    if (j > 0 && mat[i][j-1] && !visited[i][j-1])
+        dfs(i, j-1); // left
+}
+
+void computeLPSArray(char* pat, int M, int* lps)
+{
+    int len = 0;
+
+    lps[0] = 0; // lps[0] is always 0
+
+    int i = 1;
+    while (i < M) {
+        if (pat[i] == pat[len]) {
+            len++;
+            lps[i] = len;
+            i++;
+        }
+        else {
+            if (len != 0) {
+                len = lps[len - 1];
+            }
+            else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+}
+
+
+void KMPSearch(char* pat, char* txt)
+{
+    int M = strlen(pat);
+    int N = strlen(txt);
+    int lps[M];
+
+    computeLPSArray(pat, M, lps);
+
+    int i = 0;  // index for txt[]
+    int j = 0;  // index for pat[]
+    while (i < N) {
+        if (pat[j] == txt[i]) {
+            j++;
+            i++;
+        }
+
+        if (j == M) {
+            printf("Pattern found at index %d\n", i - j);
+            j = lps[j - 1];
+        }
+
+        // mismatch after j matches
+        else if (i < N && pat[j] != txt[i]) {
+            // Do not match lps[0..lps[j-1]] characters,
+            // they will match anyway
+            if (j != 0)
+                j = lps[j - 1];
+            else
+                i = i + 1;
+        }
+    }
+}
+
+
+
+int main()
+{
+      struct student s[20];
+      int ch;
+      char pat[10];
+      char txt[]="10th Diploma Governmentservice Science Commerce Arts B.Sc B.Pharma B.E. BAMS MBBS BDS B.Com BBA C.A. BSW B.A. LLB LLM M.A. MSW BCA MCA MBA M.Com B.Ed M.Ed C.S. MDS MD M.Tech M.Pharma M.ScPh.D";
+      FILE *fp1,*fp2;
+      while(1)
+      {
+          printf("\n1.Display Student Details:\n");
+          printf("2.Graph Matrix\n");
+          printf("3.DFS Graph Traversal\n");
+          printf("4.Enter course you are interested in:\n");
+          printf("5.Exit\n");
+          printf("Enter choice:\n");
+          scanf("%d",&ch);
+          switch(ch)
+          {
+              case 1:fp1=fopen("students1.txt","r");
+                     for(int i=0;i<15;i++)
+                     {
+                         fscanf(fp1,"%s %s %d %s",s[i].fname,s[i].lname,&s[i].rank,s[i].email);
+                     }
+                     bubblesort(s);
+                     for (int i = 0; i <15; i++)
+                     {
+                         printf("%s            %s           %d\t    %s\n", s[i].fname, s[i].lname, s[i].rank, s[i].email);
+                     }
+                     fclose(fp1);
+                     break;
+              case 2:fp2=fopen("graph.txt", "r");
+                     for(int a=0;a<36;a++)
+                     {
+                         for(int b=0;b<36;b++)
+                         {
+                             fscanf(fp2,"%d",&mat[a][b]);
+                         }
+                     }
+                     for(int a=0;a<35;a++)
+                     {
+                         for(int b=0;b<36;b++)
+                         {
+                             printf("%d ",mat[a][b]);
+                         }
+                         printf("\n");
+                     }
+                     fclose(fp2);
+                     break;
+              case 3:for(int i=0;i<MAX_SIZE;i++)
+                        for(int j=0;j<MAX_SIZE;j++)
+                            visited[i][j]=0;
+
+                     int count=0;
+                     for(int i=0;i<MAX_SIZE;i++)
+                     {
+                         for(int j=0;j<MAX_SIZE;j++)
+                         {
+                             if(mat[i][j] && !visited[i][j])
+                             {
+                                 dfs(i,j);
+                                 count++;
+                             }
+                         }
+                     }
+                     break;
+            case 4: printf("\nEnter the degree you are interested in :\n");
+                    scanf("%s",pat);
+                    KMPSearch(pat, txt);
+                    break;
+
+            default:exit(0);
+
+          }
+      }
+
+
+}
+
