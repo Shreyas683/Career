@@ -1,0 +1,31 @@
+Karnataka, KLE University, Hubli
+Karnataka, Manipal Academy of Higher Education, Manipal
+Karnataka, Rajiv Gandhi University of Health Sciences, Bangalore
+Karnataka, Indian Institute of Technology Dharwad, Dharwad
+Karnataka, National Institute of Technology, Suratkal 
+Maharashtra, SavitriBai Phule University, Pune
+Maharashtra, University of Mumbai, Mumbai
+Maharashtra, Shivaji University of Kolhapur, Kolhapur
+Maharashtra, Tata Institute of Social Sciences, Mumbai
+Mahrashtra, DR. B.R. Ambedkar Marathwada University, Aurangabad
+Uttar_Pradesh, University of Lucknow, Lucknow
+Uttar_Pradesh, Banaras Hindu University, Varanasi
+Uttar_Pradesh, Dr.APJ Abdul Kalam Technical University, Lucknow
+Uttar_Pradesh, Aligarh Muslim University, Aligarh
+Uttar_Pradesh, Career Institute of Medical Sciences and Hospital, Lucknow
+Gujarat, Gujarat University, Ahmedabad
+Gujarat, Parul University, Vadodara
+Gujarat, The Maharaja Sayajirao University, Vadodara
+Gujarat, Sardar Patel University, Vallabh Vidyanagar
+Gujarat, Saurashtra University, Rajkot
+West_Bengal, University of Calcutta, Kolkata
+West_Bengal, Indian Institute of Technology Kharagpur, Kharagpur
+West_Bengal, KPC Medical College and Hospital, Jadhavpur
+West_Bengal, University of Burdwan, Bardhaman
+West_Bengal, West Bengal State University, Barasat
+Andhra_Pradesh, AIIMS Mangalagiri, Mangalagiri
+Andhra_Pradesh, Sri Krishnadevaraya University, Anantapur,
+Andhra_Pradesh, KL University, Vijaywada
+Andhra_Pradesh, Sri Sathya Sai University, Puttaparthi
+Andhra_Pradesh, Indian Institute of Technology Tirupati, Tirupati
+
