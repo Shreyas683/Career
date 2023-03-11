@@ -12,7 +12,7 @@
 int mat[MAX_SIZE][MAX_SIZE];
 int visited[MAX_SIZE][MAX_SIZE];
 
-
+//structure to store student details
 struct student
 {
     char fname[10];
@@ -21,12 +21,13 @@ struct student
     char email[20];
 };
 
-
+//structure to store college details
 struct college {
     char state[100];
     char name[100];
     char location[100];
 };
+
 
 void bubblesort(struct student *s)
 {
@@ -46,14 +47,77 @@ void bubblesort(struct student *s)
     }
 }
 
+//this function is used to make the text color in console red
+void red () {
+  printf("\033[1;31m");
+}
 
+
+void reset()
+{
+	printf("\033[0m");
+}
+
+//this function is used to make the text color in console purple
+void purple()
+{
+    printf("\033[0;35m");
+}
+
+//this function is used to make the text color in console green
+void green()
+{
+    printf("\033[0;32m");
+}
+
+//this function is used to make the text color in console yellow
+void yellow()
+{
+    printf("\033[1;33m");
+}
+
+//this function is used to make the text color in console cyan
+void cyan()
+{
+    printf("\033[0;36m");
+}
+
+//this function is used to make the text color in console orange
+void orange()
+{
+    printf("\033[38;2;255;165;0m");
+}
+
+//this function is used to make the text color in console blue
+void blue()
+{
+    printf("\033[0;34m");
+}
+
+//this function is used to make the text color in console light purple
+void lightpurple()
+{
+    printf("\033[1;35m");
+}
+
+// To calculate the minimum distance which is used in dijkstra algorithm
+int minDistance(int dist[], int sptSet[], int n)
+{
+    int min = INFINITY, min_index;
+
+    for (int v = 0; v < n; v++)
+        if (sptSet[v] == 0 && dist[v] <= min)
+            min = dist[v], min_index = v;
+
+    return min_index;
+}
+
+//To display all course names
 void dfs(int i, int j)
 {
     // Mark the current cell as visited
     visited[i][j] = 1;
     // Print the current cell
-    //printf("(%d, %d) ", i, j);
-   // printf("%d ",j);
     if(j==0){
         printf("10th ");
     }
@@ -212,29 +276,29 @@ void dfs(int i, int j)
 }
 
 
-void computeLPSArray(char* pat, int M, int* lps)
+void goodSuffix(char* pat, int M, int* suffix)
 {
     int len = 0;
 
-    lps[0] = 0; // lps[0] is always 0
+    suffix[0] = 0; // suffix[0] is always 0
 
     int i = 1;
     while (i < M) {
         if (pat[i] == pat[len])
         {
             len++;
-            lps[i] = len;
+            suffix[i] = len;
             i++;
         }
         else
         {
             if (len != 0)
             {
-                len = lps[len - 1];
+                len = suffix[len - 1];
             }
             else
             {
-                lps[i] = 0;
+                suffix[i] = 0;
                 i++;
             }
         }
@@ -242,13 +306,13 @@ void computeLPSArray(char* pat, int M, int* lps)
 }
 
 
-void KMPSearch(char* pat, char* txt)
+void KMP(char* pat, char* txt)
 {
     int M = strlen(pat);
     int N = strlen(txt);
-    int lps[M];
+    int suffix[M];
 
-    computeLPSArray(pat, M, lps);
+    goodSuffix(pat, M, suffix);
 
     int i = 0;  // index for txt[]
     int j = 0;  // index for pat[]
@@ -262,16 +326,16 @@ void KMPSearch(char* pat, char* txt)
         if (j == M)
         {
             //printf("Pattern found at index %d\n", i - j);
-            j = lps[j - 1];
+            j = suffix[j - 1];
         }
 
         // mismatch after j matches
         else if (i < N && pat[j] != txt[i])
         {
-            // Do not match lps[0..lps[j-1]] characters,
+            // Do not match suffix[0..suffix[j-1]] characters,
             // they will match anyway
             if (j != 0)
-                j = lps[j - 1];
+                j = suffix[j - 1];
             else
                 i = i + 1;
         }
@@ -354,30 +418,20 @@ void dijkstra(int graph[MAX][MAX],int n,int startnode)
     }
 }
 
-int minDistance(int dist[], int sptSet[], int n)
-{
-    int min = INFINITY, min_index;
-
-    for (int v = 0; v < n; v++)
-        if (sptSet[v] == 0 && dist[v] <= min)
-            min = dist[v], min_index = v;
-
-    return min_index;
-}
-
-
-
 int main()
 {
       struct student s[20];
-    // Create an array to store the colleges
+      // Create an array to store the colleges
       struct college colleges[2000];
       int num_colleges = 0;
       int ch,i,n=1;
+      //create a matrix G
       int G[MAX][MAX];
       int j,v,u;
+      //create a matrix pat
       char pat[10];
       char txt[]="10th Diploma Governmentservice Science Commerce Arts B.Sc B.Pharma B.E. BAMS MBBS BDS B.Com BBA C.A. BSW B.A. LLB LLM M.A. MSW BCA MCA MBA M.Com B.Ed M.Ed C.S. MDS MD M.Tech M.Pharma M.ScPh.D";
+      //declare FILE pointers
       FILE *fp1,*fp2,*fp3,*fp4,*fp5,*fp6,*fp7,*fp8;
       orange();
       printf("CAREER GUIDANCE:\n");
@@ -387,6 +441,7 @@ int main()
       printf("With some effort and exploration, you can find a fulfilling career that matches your passions and skills.\n");
       reset();
       purple();
+      //read student structure
       printf("\nEnter your details to proceed further:\n");
       reset();
       green();
@@ -405,7 +460,9 @@ int main()
         {
             fscanf(fp1,"%s %s %d %s\n",s[i].fname,s[i].lname,&s[i].rank,s[i].email);
         }
-       bubblesort(s);
+
+        bubblesort(s);
+
         fp1=fopen("students1.txt","w");
         for(i=0;i<n;i++)
         {
@@ -414,9 +471,6 @@ int main()
         }
 
         fclose(fp1);
-
-
-
 
         fp2=fopen("graph.txt", "r");
                      for(int a=0;a<36;a++)
@@ -427,7 +481,6 @@ int main()
                          }
                      }
         fclose(fp2);
-
 
     while(1)
 
@@ -445,12 +498,16 @@ int main()
         printf("10.Check the shortest distances between top colleges of West_Bengal\n");
         printf("11.Exit\n\n");
         reset();
+
         yellow();
         printf("Enter choice:\n");
         reset();
+
         scanf("%d",&ch);
+
         switch(ch)
         {
+
             case 1:
                     printf("\nList of courses:\n");
                     cyan();
@@ -474,15 +531,12 @@ int main()
                      reset();
                      break;
 
-
-
-
             case 2: yellow();
                     printf("Enter the degree you are interested in :\n");
                     reset();
                     scanf("%s",pat);
                     red();
-                    KMPSearch(pat, txt);
+                    KMP(pat, txt);
                     if(strcasecmp(pat,"Diploma")==0)
                     {
                         printf("Exam required:None\n");
@@ -690,8 +744,6 @@ int main()
                     reset();
                     break;
 
-
-
             case 3 : cyan();
                     printf("Enter the degree and know it!!\n");
                     reset();
@@ -839,8 +891,6 @@ int main()
                     reset();
                     break;
 
-
-
             case 4: // Create an array to store the colleges
                     // Read the colleges from the file
                     read_colleges(colleges, &num_colleges);
@@ -973,51 +1023,10 @@ int main()
                      printf("\n");
                      reset();
                     break;
+
             default:exit(0);
         }
     }
 }
 
-void red () {
-  printf("\033[1;31m");
-}
 
-void reset()
-{
-	printf("\033[0m");
-}
-
-void purple()
-{
-    printf("\033[0;35m");
-}
-
-void green()
-{
-    printf("\033[0;32m");
-}
-
-void yellow()
-{
-    printf("\033[1;33m");
-}
-
-void cyan()
-{
-    printf("\033[0;36m");
-}
-
-void orange()
-{
-    printf("\033[38;2;255;165;0m");
-}
-
-void blue()
-{
-    printf("\033[0;34m");
-}
-
-void lightpurple()
-{
-    printf("\033[1;35m");
-}
