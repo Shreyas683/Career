@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define ROWS 35
+#define COLS 35
+
+int graph[35][35];
+
+void dfs(int i, int j, int visited[][COLS], FILE* fp);
+
+int main()
+{
+    int visited[ROWS][COLS] = {0};
+    FILE* fp;
+    fp = fopen("graph.txt", "r");
+    for(int i = 0; i < 35; i++)
+    {
+        for(int j = 0; j < 35; j++)
+            fscanf(fp, "%d", &graph[i][j]);
+    }
+    fclose(fp);
+
+    fp = fopen("output.txt", "w");
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            if (!visited[i][j] && graph[i][j]) {
+                dfs(i, j, visited, fp);
+            }
+        }
+    }
+    fclose(fp);
+    fp=fopen("output.txt","r");
+    int a[100];
+    for(int i=0;i<35;i++)
+    {
+        fscanf(fp,"%d",&a[i]);
+    }
+
+    fclose(fp);
+    for(int i=0;i<35;i++)
+    {
+        printf("%d ",a[i]);
+    }
+    printf("\n");
+
+    quicksort(a, 0, 34);
+    printf("Sorted array: \n");
+    for (int i = 0; i < 35; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+void dfs(int i, int j, int visited[][COLS], FILE* fp) {
+    visited[i][j] = 1;
+    fprintf(fp, "%d\n", j);
+    // write current node to file
+    // explore neighbors
+    if (i-1 >= 0 && graph[i-1][j] && !visited[i-1][j])
+        dfs(i-1, j, visited, fp);
+    if (i+1 < ROWS && graph[i+1][j] && !visited[i+1][j])
+        dfs(i+1, j, visited, fp);
+    if (j-1 >= 0 && graph[i][j-1] && !visited[i][j-1])
+        dfs(i, j-1, visited, fp);
+    if (j+1 < COLS && graph[i][j+1] && !visited[i][j+1])
+        dfs(i, j+1, visited, fp);
+}
+
+
+void quicksort(int arr[], int low, int high) {
+    if (low < high) {
+        // partition the array and get the pivot index
+        int pivot_index = low;
+        int pivot_value = arr[high];
+        for (int i = low; i < high; i++) {
+            if (arr[i] < pivot_value) {
+                int temp = arr[i];
+                arr[i] = arr[pivot_index];
+                arr[pivot_index] = temp;
+                pivot_index++;
+            }
+        }
+        int temp = arr[pivot_index];
+        arr[pivot_index] = arr[high];
+        arr[high] = temp;
+
+        // recursively quicksort the left and right subarrays
+        quicksort(arr, low, pivot_index - 1);
+        quicksort(arr, pivot_index + 1, high);
+    }
+}
+
