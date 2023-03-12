@@ -116,174 +116,6 @@ int minDistance(int dist[], int sptSet[], int n)
 
     return min_index;
 }
-/*
-//To display all course names
-void dfs(int i, int j)
-{
-    // Mark the current cell as visited
-    visited[i][j] = 1;
-    // Print the current cell
-    if(j==0)
-    {
-        printf("10th ");
-    }
-    if(j==1)
-    {
-        printf("Diploma ");
-    }
-    if(j==2)
-    {
-     printf("Government service ");
-    }
-     if(j==4)
-    {
-
-        printf("Commerce ");
-    }
-      if(j==5)
-    {
-       printf("Arts ");
-
-    }
-      if(j==6)
-    {
-       printf("B.Arch ");
-    }
-      if(j==7)
-    {
-        printf("B.Sc ");
-    }
-      if(j==8)
-    {
-        printf("B.Pharma ");
-    }
-      if(j==9)
-    {
-       printf("B.E. ");
-    }
-      if(j==10)
-    {
-        printf("BAMS ");
-    }
-      if(j==11)
-    {
-        printf("MBBS ");
-    }
-      if(j==12)
-    {
-        printf("BDS ");
-    }
-      if(j==13)
-    {
-        printf("B.Com ");
-    }
-      if(j==14)
-    {
-        printf("BBA ");
-    }
-      if(j==15)
-    {
-        printf("CA ");
-    }
-      if(j==16)
-    {
-        printf("BSW ");
-    }
-      if(j==17)
-    {
-        printf("B.A.");
-    }
-     if(j==18)
-    {
-        printf("LLB ");
-    }
-     if(j==19)
-    {
-       printf("LLM ");
-    }
-      if(j==20)
-    {
-      printf("M.A. ");
-    }
-      if(j==21)
-    {
-       printf("MSW ");
-    }
-      if(j==22)
-    {
-        printf("BCA ");
-    }
-      if(j==23)
-    {
-        printf("MCA ");
-    }
-      if(j==24)
-    {
-        printf("MBA ");
-    }
-      if(j==25)
-    {
-       printf("M.Com ");
-    }
-      if(j==26)
-    {
-        printf("B.Ed ");
-    }
-      if(j==27)
-    {
-        printf("M.Ed ");
-    }
-     if(j==28)
-    {
-        printf("C.S. ");
-    }
-      if(j==29)
-    {
-        printf("MDS ");
-    }
-      if(j==30)
-    {
-        printf("MD ");
-    }
-      if(j==31)
-    {
-        printf(" M.Tech ");
-    }
-      if(j==32)
-    {
-        printf("M.Pharma ");
-    }
-      if(j==33)
-    {
-        printf("M.Sc ");
-    }
-      if(j==34)
-    {
-        printf("Ph.D ");
-    }
-
-
-    // Explore all 4 neighbors (up, right, down, left)
-    if (i > 0 && mat[i-1][j] && !visited[i-1][j])
-    {
-        dfs(i-1, j); // up
-    }
-
-    if (j < MAX_SIZE-1 && mat[i][j+1] && !visited[i][j+1])
-        {
-            dfs(i, j+1); // right
-        }
-    if (i < MAX_SIZE-1 && mat[i+1][j] && !visited[i+1][j])
-    {
-        dfs(i+1, j); // down
-    }
-    if (j > 0 && mat[i][j-1] && !visited[i][j-1])
-    {
-        dfs(i, j-1); // left
-    }
-}*/
-
-
 
 void dfs(int i, int j, int visited[][COLS], FILE* fp2) {
     visited[i][j] = 1;
@@ -486,23 +318,29 @@ int main()
       int j,v,u;
       //create a string pat
       char pat[10];
+
       char txt[]="10th Diploma Governmentservice Science Commerce Arts B.Sc B.Pharma B.E. BAMS MBBS BDS B.Com BBA C.A. BSW B.A. LLB LLM M.A. MSW BCA MCA MBA M.Com B.Ed M.Ed C.S. MDS MD M.Tech M.Pharma M.Sc Ph.D";
       //declare FILE pointers
       FILE *fp1,*fp2,*fp3,*fp4,*fp5,*fp6,*fp7,*fp8;
+
       orange();
       printf("CAREER GUIDANCE:\n");
       reset();
+
       yellow();
       printf("If you're looking for career guidance, the first step is to take stock of your interests, skills, and values. This will help you identify potential careers that align with your strengths and goals. It's also important to research different career options and talk to professionals in the field to gain insights and advice.\n");
       printf("With some effort and exploration, you can find a fulfilling career that matches your passions and skills.\n");
       reset();
+
       purple();
       //read student structure
       printf("\nEnter your details to proceed further:\n");
       reset();
+
       green();
        printf("Enter | first name | last name | rank | email:\n");
        reset();
+
        // fp1=fopen("students1.txt","w");
         for(i=0;i<n;i++)
         {
@@ -520,16 +358,6 @@ int main()
         }
 
         fclose(fp1);
-
-       /* fp2=fopen("graph.txt", "r");
-                     for(int a=0;a<35;a++)
-                     {
-                         for(int b=0;b<35;b++)
-                         {
-                             fscanf(fp2,"%d",&mat[a][b]);
-                         }
-                     }
-        fclose(fp2);*/
 
     while(1)
 
@@ -558,26 +386,6 @@ int main()
         {
 
             case 1://displaying list of courses to ease the searching
-                  /*  printf("\nList of courses:\n");
-                    cyan();
-                    for(int i=0;i<MAX_SIZE;i++)
-                        for(int j=0;j<MAX_SIZE;j++)
-                            visited[i][j]=0;
-
-                     int count=0;
-                     for(int i=0;i<MAX_SIZE;i++)
-                     {
-                         for(int j=0;j<MAX_SIZE;j++)
-                         {
-                             if(mat[i][j] && !visited[i][j])
-                             {
-                                 dfs(i,j);
-                                 count++;
-                             }
-                         }
-                     }
-                     printf("\n");
-                     reset();*/
                     fp2=fopen("graph.txt", "r");
                      for(int a=0;a<35;a++)
                      {
