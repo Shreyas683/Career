@@ -601,166 +601,201 @@ int main()
                     fclose(fp2);
                     fp2=fopen("output.txt","r");
                     int a[100];
-                    for(int i=0;i<35;i++)
+                    for(int i=0;i<37;i++)
                     {
                         fscanf(fp2,"%d",&a[i]);
                     }
 
                     fclose(fp2);
-                    for(int i=0;i<35;i++)
+                    for(int i=0;i<36;i++)
                     {
                         printf("%d ",a[i]);
                     }
                     printf("\n");
 
                     quicksort(a, 0, 34);
+                    int c2=0,c5=0,c3=0,c4=0,c19=0;
+                    green();
                     printf("Sorted array: \n");
-                    for (int i = 0; i < 35; i++)
+                    reset();
+                    lightpurple();
+                    for (int i = 0; i < 37; i++)
                     {
                        //printf("%d ", a[i]);
                         if(a[i]==0)
                         {
-                            printf("10th ");
+                            printf("10th \t");
                         }
                         if(a[i]==1)
                         {
-                            printf("Diploma ");
+                            printf("Diploma \t");
                         }
                         if(a[i]==2)
                         {
-                            printf("Government_service ");
+                            if(c2<1)
+                            {
+                                printf("Govt services \t");
+                                c2++;
+                            }
+                            else
+                                continue;
                         }
                         if(a[i]==3)
                         {
-                            printf("Science ");
+                            if(c3<1)
+                            {
+                                printf("science \t");
+                                c3++;
+                            }
+                            else
+                                continue;
                         }
                         if(a[i]==4)
                         {
-                            printf("Commerce ");
+                            if(c4<1)
+                            {
+                                printf("Commerce\t");
+                                c4++;
+                            }
+                            else
+                                continue;
                         }
                         if(a[i]==5)
                         {
-                            printf("Arts ");
+                            if(c5<1)
+                            {
+                                printf("Arts\t");
+                                c5++;
+                            }
+                            else
+                                continue;
                         }
                         if(a[i]==6)
                         {
-                            printf("B.Arch ");
+                            printf("B.Arch \t");
                         }
                         if(a[i]==7)
                         {
-                            printf("B.Sc ");
+                            printf("B.Sc \t");
                         }
                         if(a[i]==8)
                         {
-                            printf("B.Pharma ");
+                            printf("B.Pharma \t");
                         }
                         if(a[i]==9)
                         {
-                            printf("B.E. ");
+                            printf("B.E. \t");
                         }
                         if(a[i]==10)
                         {
-                            printf("BAMS ");
+                            printf("BAMS \t");
                         }
                         if(a[i]==11)
                         {
-                            printf("MBBS ");
+                            printf("MBBS \t");
                         }
                         if(a[i]==12)
                         {
-                            printf("BDS ");
+                            printf("BDS \t");
                         }
                         if(a[i]==13)
                         {
-                            printf("B.Com ");
+                            printf("B.Com \t");
                         }
                         if(a[i]==14)
                         {
-                            printf("BBA ");
+                            printf("BBA \t");
                         }
                         if(a[i]==15)
                         {
-                            printf("CA ");
+                            printf("CA \t");
                         }
                         if(a[i]==16)
                         {
-                            printf("BSW ");
+                            printf("BSW \t");
                         }
                         if(a[i]==17)
                         {
-                            printf("B.A.");
+                            printf("B.A. \t");
                         }
                         if(a[i]==18)
                         {
-                            printf("LLB ");
+                            printf("LLB \t");
                         }
                         if(a[i]==19)
                         {
-                           printf("LLM ");
+                           if(c19<1)
+                            {
+                                printf("LLM \t");
+                                c19++;
+                            }
+                            else
+                                continue;
                         }
                         if(a[i]==20)
                         {
-                          printf("M.A. ");
+                          printf("M.A. \t\n");
                         }
                         if(a[i]==21)
                         {
-                           printf("MSW ");
+                           printf("MSW \t");
                         }
                         if(a[i]==22)
                         {
-                            printf("BCA ");
+                            printf("BCA \t");
                         }
                         if(a[i]==23)
                         {
-                            printf("MCA ");
+                            printf("MCA \t");
                         }
                         if(a[i]==24)
                         {
-                            printf("MBA ");
+                            printf("MBA \t");
                         }
                         if(a[i]==25)
                         {
-                           printf("M.Com ");
+                           printf("M.Com \t");
                         }
                         if(a[i]==26)
                         {
-                            printf("B.Ed ");
+                            printf("B.Ed \t");
                         }
                         if(a[i]==27)
                         {
-                            printf("M.Ed ");
+                            printf("M.Ed \t\n");
                         }
                         if(a[i]==28)
                         {
-                            printf("C.S. ");
+                            printf("C.S. \t");
                         }
                         if(a[i]==29)
                         {
-                            printf("MDS ");
+                            printf("MDS \t");
                         }
                         if(a[i]==30)
                         {
-                            printf("MD ");
+                            printf("MD \t");
                         }
                         if(a[i]==31)
                         {
-                            printf(" M.Tech ");
+                            printf(" M.Tech \t");
                         }
                         if(a[i]==32)
                         {
-                            printf("M.Pharma ");
+                            printf("M.Pharma \t");
                         }
                         if(a[i]==33)
                         {
-                            printf("M.Sc ");
+                            printf("M.Sc \t");
                         }
                         if(a[i]==34)
                         {
-                            printf("Ph.D ");
+                            printf("Ph.D \t\n");
                         }
 
                     }
                     printf("\n");
+                    reset();
 
                      break;
 
